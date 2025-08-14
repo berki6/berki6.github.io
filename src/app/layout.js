@@ -78,6 +78,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <HydrationWrapper>
+          {/* Overlay for mobile menu */}
+          {menuOpen && (
+            <div
+              className="menu-overlay"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            />
+          )}
           <nav className="navbar">
             <div className="navbar-brand">
               <a href="/">My Portfolio</a>
@@ -295,6 +303,15 @@ export default function RootLayout({ children }) {
             transition: 0.3s;
           }
           @media (max-width: 768px) {
+            .menu-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100vw;
+              height: 100vh;
+              background: rgba(0, 0, 0, 0.25);
+              z-index: 99;
+            }
             .nav-links {
               display: none;
               position: absolute;
