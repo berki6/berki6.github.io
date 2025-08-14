@@ -1,26 +1,15 @@
+/* Theme variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-:root[data-theme="dark"] {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-:root[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-/* Define variables in the theme switcher */
-:root {
   --tag-bg: #f0f0f0;
   --tag-border: #d4d4d4;
   --tag-text: #333;
 }
 
-[data-theme="dark"] {
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
   --tag-bg: #222222;
   --tag-border: #444;
   --tag-text: #ccc;
@@ -45,7 +34,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, opacity 0.3s;
+  opacity: 0;
+}
+
+body.hydrated {
+  opacity: 1;
 }
 
 * {
