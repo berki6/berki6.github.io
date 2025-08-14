@@ -330,6 +330,13 @@ export default function RootLayout({ children }) {
             transition: 0.3s;
           }
           @media (max-width: 768px) {
+            .desktop-toggle {
+              display: none !important;
+            }
+            .mobile-toggle {
+              display: block !important;
+              margin-bottom: 1rem;
+            }
             .menu-overlay {
               position: fixed;
               top: 0;
