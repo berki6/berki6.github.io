@@ -3,6 +3,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation"; // Next.js App Router hook to get current path
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +16,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// HydrationWrapper: delays rendering until after hydration to avoid FOUC
 function HydrationWrapper({ children }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -25,6 +26,8 @@ function HydrationWrapper({ children }) {
 }
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname(); // get current route path for animation key
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
@@ -80,35 +83,31 @@ export default function RootLayout({ children }) {
               <a href="/">My Portfolio</a>
             </div>
             <div className="theme-toggle">
-              {/* Render theme toggles only after hydration */}
-              {true && ( // HydrationWrapper ensures we're hydrated here
-                <>
-                  <button
-                    className={theme === "light" ? "active" : ""}
-                    onClick={() => setTheme("light")}
-                    aria-label="Light mode"
-                  >
-                    🌞
-                  </button>
-                  <button
-                    className={theme === "dark" ? "active" : ""}
-                    onClick={() => setTheme("dark")}
-                    aria-label="Dark mode"
-                  >
-                    🌚
-                  </button>
-                  <button
-                    className={theme === "system" ? "active" : ""}
-                    onClick={(e) => {
-                      setTheme("system");
-                      e.currentTarget.blur();
-                    }}
-                    aria-label="System mode"
-                  >
-                    🖥️
-                  </button>
-                </>
-              )}
+              {/* Safe because inside HydrationWrapper */}
+              <button
+                className={theme === "light" ? "active" : ""}
+                onClick={() => setTheme("light")}
+                aria-label="Light mode"
+              >
+                🌞
+              </button>
+              <button
+                className={theme === "dark" ? "active" : ""}
+                onClick={() => setTheme("dark")}
+                aria-label="Dark mode"
+              >
+                🌚
+              </button>
+              <button
+                className={theme === "system" ? "active" : ""}
+                onClick={(e) => {
+                  setTheme("system");
+                  e.currentTarget.blur();
+                }}
+                aria-label="System mode"
+              >
+                🖥️
+              </button>
             </div>
             <button
               className="hamburger"
@@ -135,8 +134,18 @@ export default function RootLayout({ children }) {
             </ul>
           </nav>
 
-          {/* Your page content */}
-          {children}
+          {/* Page transition wrapper */}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={pathname} // animate on route change
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </HydrationWrapper>
 
         <style jsx global>{`
