@@ -1,32 +1,35 @@
 "use client";
 
+import Image from "next/image";
+
+const projects = [
+  {
+    title: "Portfolio Website",
+    desc: "Modern, animated, and responsive personal site.",
+    img: require("/public/vercel.svg"), // Static import for blur placeholder support
+    site: "https://berki6.github.io",
+    code: "https://github.com/berki6/berki6.github.io",
+    tags: ["React", "Next.js", "JavaScript", "CSS"],
+  },
+  {
+    title: "UI Library",
+    desc: "Custom React components for fast prototyping.",
+    img: require("/public/next.svg"),
+    site: "#",
+    code: "#",
+    tags: ["React", "TypeScript", "Storybook"],
+  },
+  {
+    title: "Animation Playground",
+    desc: "GSAP-powered interactive demos.",
+    img: require("/public/globe.svg"),
+    site: "#",
+    code: "#",
+    tags: ["GSAP", "JavaScript", "HTML", "CSS"],
+  },
+];
+
 export default function Projects() {
-  const projects = [
-    {
-      title: "Portfolio Website",
-      desc: "Modern, animated, and responsive personal site.",
-      img: "/vercel.svg",
-      site: "https://berki6.github.io",
-      code: "https://github.com/berki6/berki6.github.io",
-      tags: ["React", "Next.js", "JavaScript", "CSS"],
-    },
-    {
-      title: "UI Library",
-      desc: "Custom React components for fast prototyping.",
-      img: "/next.svg",
-      site: "#",
-      code: "#",
-      tags: ["React", "TypeScript", "Storybook"],
-    },
-    {
-      title: "Animation Playground",
-      desc: "GSAP-powered interactive demos.",
-      img: "/globe.svg",
-      site: "#",
-      code: "#",
-      tags: ["GSAP", "JavaScript", "HTML", "CSS"],
-    },
-  ];
   return (
     <main className="projects-main">
       <h1 className="projects-title">Projects</h1>
@@ -34,7 +37,14 @@ export default function Projects() {
         {projects.map((p, i) => (
           <div className="project-card" key={i}>
             <div className="project-img-wrap">
-              <img src={p.img} alt={p.title} className="project-img" />
+              <Image
+                src={p.img}
+                alt={p.title}
+                placeholder="blur"
+                width={80}
+                height={80}
+                className="project-img"
+              />
             </div>
             <div className="project-info">
               <h2>{p.title}</h2>
@@ -140,9 +150,8 @@ export default function Projects() {
           margin-bottom: 1rem;
         }
         .project-img {
-          max-width: 100%;
-          max-height: 100%;
           border-radius: 8px;
+          object-fit: contain;
         }
         .project-info {
           text-align: center;
@@ -159,19 +168,18 @@ export default function Projects() {
           margin-bottom: 0.5rem;
         }
         .project-tag:hover {
-          background: var(--accent-color); /* Use a bold accent color */
+          background: var(--accent-color);
           border-color: var(--accent-color);
           color: #fff;
-          transform: translateY(-2px); /* Slight lift effect */
+          transform: translateY(-2px);
         }
         .project-tag {
-          /* Existing styles */
           background: var(--tag-bg);
           border: 1px solid var(--tag-border);
-          border-radius: 9999px; /* More rounded look */
+          border-radius: 9999px;
           padding: 0.3rem 0.8rem;
           font-size: 0.8rem;
-          transition: all 0.2s ease; /* Add transition for smoothness */
+          transition: all 0.2s ease;
         }
         .project-actions {
           display: flex;

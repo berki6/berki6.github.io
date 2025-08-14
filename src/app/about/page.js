@@ -1,11 +1,19 @@
 "use client";
 
+import Image from "next/image";
+
 export default function About() {
   const skills = ["JavaScript", "React", "Next.js", "GSAP", "UI/UX", "CSS", "HTML"];
   return (
     <main className="about-main">
       <div className="about-card">
-        <img src="/vercel.svg" alt="Avatar" className="about-avatar" />
+        <Image
+          src="/vercel.svg"
+          alt="Avatar"
+          className="about-avatar"
+          width={80}
+          height={80}
+        />
         <h1 className="about-title">About Me</h1>
         <p className="about-bio">
           Hi, I'm Bereket Fikadu. I'm passionate about building beautiful web experiences and creative interfaces. I specialize in JavaScript, React, Next.js, and animation libraries like GSAP.

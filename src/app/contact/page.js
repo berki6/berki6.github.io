@@ -1,10 +1,18 @@
 "use client";
 
+import Image from "next/image";
+
 export default function Contact() {
   return (
     <main className="contact-main">
       <div className="contact-card">
-        <img src="/vercel.svg" alt="Avatar" className="contact-avatar" />
+        <Image
+          src="/vercel.svg"
+          alt="Avatar"
+          className="contact-avatar"
+          width={80}
+          height={80}
+        />
         <h1 className="contact-title">Contact</h1>
         <p className="contact-email">
           Email:{" "}
