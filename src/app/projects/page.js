@@ -158,20 +158,20 @@ export default function Projects() {
           color: var(--foreground);
           margin-bottom: 0.5rem;
         }
-        .project-tags {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.5rem;
+        .project-tag:hover {
+          background: var(--accent-color); /* Use a bold accent color */
+          border-color: var(--accent-color);
+          color: #fff;
+          transform: translateY(-2px); /* Slight lift effect */
         }
         .project-tag {
-          background-color: #e0e0e0;
-          color: #333;
-          border-radius: 4px;
-          padding: 0.25rem 0.75rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-          user-select: none;
+          /* Existing styles */
+          background: var(--tag-bg);
+          border: 1px solid var(--tag-border);
+          border-radius: 9999px; /* More rounded look */
+          padding: 0.3rem 0.8rem;
+          font-size: 0.8rem;
+          transition: all 0.2s ease; /* Add transition for smoothness */
         }
         .project-actions {
           display: flex;
