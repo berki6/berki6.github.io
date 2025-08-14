@@ -62,7 +62,34 @@ export default function RootLayout({ children }) {
     updateSystemTheme();
     mq.addEventListener("change", updateSystemTheme);
 
-    return () => mq.removeEventListener("change", updateSystemTheme);
+    <div className="mobile-toggle">
+      <div className="theme-toggle">
+        <button
+          className={theme === "light" ? "active" : ""}
+          onClick={() => setTheme("light")}
+          aria-label="Light mode"
+        >
+          🌞
+        </button>
+        <button
+          className={theme === "dark" ? "active" : ""}
+          onClick={() => setTheme("dark")}
+          aria-label="Dark mode"
+        >
+          🌚
+        </button>
+        <button
+          className={theme === "system" ? "active" : ""}
+          onClick={(e) => {
+            setTheme("system");
+            e.currentTarget.blur();
+          }}
+          aria-label="System mode"
+        >
+          🖥️
+        </button>
+      </div>
+    </div>;
   }, [theme]);
 
   useEffect(() => {
