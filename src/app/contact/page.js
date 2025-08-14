@@ -68,6 +68,13 @@ export default function Contact() {
           justify-content: center;
           align-items: center;
           min-height: 60vh;
+          padding: 1rem;
+        }
+        @media (max-width: 600px) {
+          .contact-card {
+            padding: 1rem;
+            max-width: 95vw;
+          }
         }
         .contact-card {
           background: var(--background);

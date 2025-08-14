@@ -115,6 +115,11 @@ export default function Projects() {
         .projects-main {
           padding: 2rem;
         }
+        @media (max-width: 900px) {
+          .projects-main {
+            padding: 1rem;
+          }
+        }
         .projects-title {
           font-size: 2rem;
           font-weight: bold;
@@ -126,6 +131,15 @@ export default function Projects() {
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 2rem;
         }
+        @media (max-width: 600px) {
+          .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          .project-card {
+            padding: 1rem;
+          }
+        }
         .project-card {
           background: var(--background);
           border-radius: 16px;
@@ -136,6 +150,7 @@ export default function Projects() {
           align-items: center;
           position: relative;
           transition: box-shadow 0.2s, transform 0.2s;
+          min-width: 0;
         }
         .project-card:hover {
           box-shadow: 0 4px 32px rgba(0, 0, 0, 0.16);

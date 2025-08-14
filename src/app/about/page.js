@@ -3,7 +3,15 @@
 import Image from "next/image";
 
 export default function About() {
-  const skills = ["JavaScript", "React", "Next.js", "GSAP", "UI/UX", "CSS", "HTML"];
+  const skills = [
+    "JavaScript",
+    "React",
+    "Next.js",
+    "GSAP",
+    "UI/UX",
+    "CSS",
+    "HTML",
+  ];
   return (
     <main className="about-main">
       <div className="about-card">
@@ -16,11 +24,15 @@ export default function About() {
         />
         <h1 className="about-title">About Me</h1>
         <p className="about-bio">
-          Hi, I'm Bereket Fikadu. I'm passionate about building beautiful web experiences and creative interfaces. I specialize in JavaScript, React, Next.js, and animation libraries like GSAP.
+          Hi, I'm Bereket Fikadu. I'm passionate about building beautiful web
+          experiences and creative interfaces. I specialize in JavaScript,
+          React, Next.js, and animation libraries like GSAP.
         </p>
         <div className="about-skills">
           {skills.map((skill, i) => (
-            <span className="about-skill" key={i}>{skill}</span>
+            <span className="about-skill" key={i}>
+              {skill}
+            </span>
           ))}
         </div>
       </div>
@@ -30,11 +42,18 @@ export default function About() {
           justify-content: center;
           align-items: center;
           min-height: 60vh;
+          padding: 1rem;
+        }
+        @media (max-width: 600px) {
+          .about-card {
+            padding: 1rem;
+            max-width: 95vw;
+          }
         }
         .about-card {
           background: var(--background);
           border-radius: 16px;
-          box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
           padding: 2rem 2.5rem;
           display: flex;
           flex-direction: column;
