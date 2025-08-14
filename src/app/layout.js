@@ -82,8 +82,8 @@ export default function RootLayout({ children }) {
             <div className="navbar-brand">
               <a href="/">My Portfolio</a>
             </div>
-            <div className="theme-toggle">
-              {/* Safe because inside HydrationWrapper */}
+            {/* Desktop theme toggle */}
+            <div className="theme-toggle desktop-toggle">
               <button
                 className={theme === "light" ? "active" : ""}
                 onClick={() => setTheme("light")}
@@ -119,6 +119,35 @@ export default function RootLayout({ children }) {
               <span className="bar" />
             </button>
             <ul className={`nav-links${menuOpen ? " open" : ""}`}>
+              {/* Mobile theme toggle */}
+              <li className="mobile-toggle">
+                <div className="theme-toggle">
+                  <button
+                    className={theme === "light" ? "active" : ""}
+                    onClick={() => setTheme("light")}
+                    aria-label="Light mode"
+                  >
+                    🌞
+                  </button>
+                  <button
+                    className={theme === "dark" ? "active" : ""}
+                    onClick={() => setTheme("dark")}
+                    aria-label="Dark mode"
+                  >
+                    🌚
+                  </button>
+                  <button
+                    className={theme === "system" ? "active" : ""}
+                    onClick={(e) => {
+                      setTheme("system");
+                      e.currentTarget.blur();
+                    }}
+                    aria-label="System mode"
+                  >
+                    🖥️
+                  </button>
+                </div>
+              </li>
               <li>
                 <a href="/projects">Projects</a>
               </li>
@@ -195,6 +224,12 @@ export default function RootLayout({ children }) {
             display: flex;
             gap: 0.5rem;
             margin-right: 1rem;
+          }
+          .desktop-toggle {
+            display: flex;
+          }
+          .mobile-toggle {
+            display: none;
           }
           .theme-toggle button {
             background: none;
@@ -291,9 +326,17 @@ export default function RootLayout({ children }) {
             .navbar-brand {
               font-size: 1.1rem;
             }
+            .desktop-toggle {
+              display: none;
+            }
+            .mobile-toggle {
+              display: block;
+              margin-bottom: 1rem;
+            }
             .theme-toggle {
               gap: 0.25rem;
-              margin-right: 0.5rem;
+              margin-right: 0;
+              justify-content: flex-start;
             }
             .theme-toggle button {
               font-size: 1rem;
