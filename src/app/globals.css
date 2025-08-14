@@ -13,6 +13,19 @@
   --foreground: #171717;
 }
 
+/* Define variables in the theme switcher */
+:root {
+  --tag-bg: #f0f0f0;
+  --tag-border: #d4d4d4;
+  --tag-text: #333;
+}
+
+[data-theme="dark"] {
+  --tag-bg: #222222;
+  --tag-border: #444;
+  --tag-text: #ccc;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
