@@ -24,6 +24,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+code,
+pre {
+  font-family: 'Geist Mono', 'Geist', monospace;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
