@@ -178,6 +178,9 @@ export default function RootLayout({ children }) {
             border-bottom: 1px solid #eee;
             font-family: var(--font-geist-sans);
             position: relative;
+            height: 64px;
+            min-height: 64px;
+            box-sizing: border-box;
           }
           .navbar-brand {
             font-weight: bold;
@@ -258,23 +261,60 @@ export default function RootLayout({ children }) {
           }
           @media (max-width: 768px) {
             .nav-links {
+              display: none;
               position: absolute;
-              top: 64px;
               left: 0;
               right: 0;
+              top: 64px;
               background: var(--background);
               flex-direction: column;
               gap: 1.5rem;
               padding: 2rem;
-              max-height: 0;
-              overflow: hidden;
               border-bottom: 1px solid #eee;
+              z-index: 100;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             }
             .nav-links.open {
-              max-height: 300px;
+              display: flex;
             }
             .hamburger {
               display: flex;
+            }
+          }
+
+          @media (max-width: 400px) {
+            .navbar {
+              padding: 0.5rem 0.5rem;
+              height: 48px;
+              min-height: 48px;
+            }
+            .navbar-brand {
+              font-size: 1.1rem;
+            }
+            .theme-toggle {
+              gap: 0.25rem;
+              margin-right: 0.5rem;
+            }
+            .theme-toggle button {
+              font-size: 1rem;
+              padding: 2px 4px;
+            }
+            .hamburger {
+              width: 28px;
+              height: 28px;
+            }
+            .bar {
+              height: 3px;
+              margin: 3px 0;
+            }
+            .nav-links {
+              top: 48px;
+              padding: 1rem;
+              gap: 1rem;
+            }
+            .nav-links li a {
+              font-size: 0.95rem;
+              padding: 0.5rem 0;
             }
           }
         `}</style>
