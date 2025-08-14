@@ -70,7 +70,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <nav className="navbar">
-          <div className="navbar-brand">My Portfolio</div>
+          <div className="navbar-brand">
+            <a href="/">My Portfolio</a>
+          </div>
           <div className="theme-toggle">
             {mounted && (
               <>
@@ -153,6 +155,10 @@ export default function RootLayout({ children }) {
             font-weight: bold;
             font-size: 1.5rem;
             color: var(--foreground);
+          }
+          .navbar-brand a {
+            color: var(--foreground);
+            text-decoration: none;
           }
           .theme-toggle {
             display: flex;

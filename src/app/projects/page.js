@@ -8,6 +8,7 @@ export default function Projects() {
       img: "/vercel.svg",
       site: "https://berki6.github.io",
       code: "https://github.com/berki6/berki6.github.io",
+      tags: ["React", "Next.js", "JavaScript", "CSS"],
     },
     {
       title: "UI Library",
@@ -15,6 +16,7 @@ export default function Projects() {
       img: "/next.svg",
       site: "#",
       code: "#",
+      tags: ["React", "TypeScript", "Storybook"],
     },
     {
       title: "Animation Playground",
@@ -22,9 +24,9 @@ export default function Projects() {
       img: "/globe.svg",
       site: "#",
       code: "#",
+      tags: ["GSAP", "JavaScript", "HTML", "CSS"],
     },
   ];
-
   return (
     <main className="projects-main">
       <h1 className="projects-title">Projects</h1>
@@ -37,6 +39,13 @@ export default function Projects() {
             <div className="project-info">
               <h2>{p.title}</h2>
               <p>{p.desc}</p>
+              <div className="project-tags">
+                {p.tags.map((tag, tagIndex) => (
+                  <span className="project-tag" key={tagIndex}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="project-actions">
               <a
@@ -147,6 +156,22 @@ export default function Projects() {
         .project-info p {
           font-size: 1rem;
           color: var(--foreground);
+          margin-bottom: 0.5rem;
+        }
+        .project-tags {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+        .project-tag {
+          background-color: #e0e0e0;
+          color: #333;
+          border-radius: 4px;
+          padding: 0.25rem 0.75rem;
+          font-size: 0.85rem;
+          font-weight: 500;
+          user-select: none;
         }
         .project-actions {
           display: flex;
