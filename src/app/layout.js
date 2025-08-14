@@ -14,6 +14,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// HydrationWrapper: delays rendering until after hydration to avoid FOUC
+function HydrationWrapper({ children }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
+  return <>{children}</>;
+}
+
 export default function RootLayout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
@@ -22,11 +32,6 @@ export default function RootLayout({ children }) {
     }
     return "system";
   });
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const [systemTheme, setSystemTheme] = useState("light");
 
@@ -69,65 +74,71 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <nav className="navbar">
-          <div className="navbar-brand">
-            <a href="/">My Portfolio</a>
-          </div>
-          <div className="theme-toggle">
-            {mounted && (
-              <>
-                <button
-                  className={theme === "light" ? "active" : ""}
-                  onClick={() => setTheme("light")}
-                  aria-label="Light mode"
-                >
-                  🌞
-                </button>
-                <button
-                  className={theme === "dark" ? "active" : ""}
-                  onClick={() => setTheme("dark")}
-                  aria-label="Dark mode"
-                >
-                  🌚
-                </button>
-                <button
-                  className={theme === "system" ? "active" : ""}
-                  onClick={(e) => {
-                    setTheme("system");
-                    e.currentTarget.blur();
-                  }}
-                  aria-label="System mode"
-                >
-                  🖥️
-                </button>
-              </>
-            )}
-          </div>
-          <button
-            className="hamburger"
-            aria-label="Toggle menu"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span className="bar" />
-            <span className="bar" />
-            <span className="bar" />
-          </button>
-          <ul className={`nav-links${menuOpen ? " open" : ""}`}>
-            <li>
-              <a href="/projects">Projects</a>
-            </li>
-            <li>
-              <a href="/about">About</a>
-            </li>
-            <li>
-              <a href="/contact">Contact</a>
-            </li>
-            <li>
-              <a href="/services">Services</a>
-            </li>
-          </ul>
-        </nav>
-        {children}
+        <HydrationWrapper>
+          <nav className="navbar">
+            <div className="navbar-brand">
+              <a href="/">My Portfolio</a>
+            </div>
+            <div className="theme-toggle">
+              {/* Render theme toggles only after hydration */}
+              {true && ( // HydrationWrapper ensures we're hydrated here
+                <>
+                  <button
+                    className={theme === "light" ? "active" : ""}
+                    onClick={() => setTheme("light")}
+                    aria-label="Light mode"
+                  >
+                    🌞
+                  </button>
+                  <button
+                    className={theme === "dark" ? "active" : ""}
+                    onClick={() => setTheme("dark")}
+                    aria-label="Dark mode"
+                  >
+                    🌚
+                  </button>
+                  <button
+                    className={theme === "system" ? "active" : ""}
+                    onClick={(e) => {
+                      setTheme("system");
+                      e.currentTarget.blur();
+                    }}
+                    aria-label="System mode"
+                  >
+                    🖥️
+                  </button>
+                </>
+              )}
+            </div>
+            <button
+              className="hamburger"
+              aria-label="Toggle menu"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span className="bar" />
+              <span className="bar" />
+              <span className="bar" />
+            </button>
+            <ul className={`nav-links${menuOpen ? " open" : ""}`}>
+              <li>
+                <a href="/projects">Projects</a>
+              </li>
+              <li>
+                <a href="/about">About</a>
+              </li>
+              <li>
+                <a href="/contact">Contact</a>
+              </li>
+              <li>
+                <a href="/services">Services</a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Your page content */}
+          {children}
+        </HydrationWrapper>
+
         <style jsx global>{`
           :root {
             --background: #fff;
@@ -139,6 +150,14 @@ export default function RootLayout({ children }) {
             --background: #121212;
             --foreground: #eee;
             --gray-alpha-100: #222222;
+          }
+
+          html:not([data-theme]) body {
+            visibility: hidden;
+          }
+          html[data-theme] body {
+            visibility: visible;
+            transition: background-color 0.3s ease, color 0.3s ease;
           }
 
           .navbar {
