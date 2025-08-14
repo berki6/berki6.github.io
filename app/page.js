@@ -77,7 +77,7 @@ export default function Home() {
         <section ref={contactRef}>
           <h2 style={{ fontSize: "2rem", marginBottom: "12px" }}>Contact</h2>
           <p style={{ fontSize: "1.1rem", color: "#444" }}>
-            Email: <a href="mailto:bereket@example.com">bereket@example.com</a>
+            Email: <a href="mailto:bereketfikadu71@gmail.com">bereketfikadu71@gmail.com</a>
           </p>
         </section>
       </main>
