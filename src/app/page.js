@@ -90,7 +90,7 @@ export default function Home() {
           GitHub
         </a>
         <a
-          href="https://linkedin.com/in/berketfikadu"
+          href="https://linkedin.com/in/bereketfikadu"
           target="_blank"
           rel="noopener noreferrer"
         >
